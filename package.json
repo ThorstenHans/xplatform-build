@@ -32,6 +32,7 @@
     "gulp-ng-annotate": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.4.1",
+    "nw-builder": "^2.0.2",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.4",
     "shelljs": "^0.5.3"
