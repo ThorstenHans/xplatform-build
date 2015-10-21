@@ -1,7 +1,7 @@
 (function(module) {
     'use strict';
 
-    function RegisterTasks(gulp, tasks) {
+    function RegisterTasks(gulp, tasks, config) {
 
         gulp.task('private:build', function(done) {
             tasks.inSequence(
@@ -18,9 +18,7 @@
         });
 
         gulp.task('private:clean', function(done) {
-            tasks.del.sync(['dist/**/*', '.temp/**/*'], {
-                force: true
-            });
+            tasks.del.sync(config.sources.del, config.options.del);
             done();
         });
 
@@ -34,7 +32,7 @@
 
         gulp.task('watch', function(done) {
             tasks.inSequence('private:build', function() {
-                return gulp.watch('src/**/*', ['private:build']);
+                return gulp.watch(config.sources.watch, ['private:build']);
             });
         });
     }

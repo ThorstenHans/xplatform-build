@@ -1,7 +1,8 @@
 (function(module){
     
     function XplatformBuild(config){
-        var gulp = require('gulp');
+        var gulp = require('gulp'),
+            nconf = require('nconf');
 
         var tasks = {
             del: require('del'),
@@ -17,7 +18,11 @@
             NwBuilder: require('nw-builder'),
             inSequence: require('run-sequence')
         };
-        config = config? config || require('./defaults.js');
+
+         
+
+        config = nconf.file({file:'./defaults.js'})
+            .overrides(config);
 
         var customGulpTasks = require('require-dir')('./gulptasks');
 

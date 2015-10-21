@@ -1,24 +1,21 @@
 (function(module) {
     'use strict';
 
-    function RegisterTasks(gulp, tasks) {
+    function RegisterTasks(gulp, tasks, config) {
 
         gulp.task('private:build:mobile', function(done){
-            tasks.shelljs.cd('mobile');
-            // 'cordova build' is short for 
-            // 'cordova build ios && cordova build android'
+            tasks.shelljs.cd(config.folders.mobile.root);
             tasks.shelljs.exec('cordova build');
-            tasks.shelljs.cd('..');
+            tasks.shelljs.cd(config.folders.mobile.backlinkToProjectRoot);
             done();
         });
 
         gulp.task('private:run:mobile', function(done){
-            tasks.shelljs.cd('mobile');
-            tasks.shelljs.exec('cordova emulate ios');
-            // use run android for genymotion
-            // use emulate android for stock emulator
-            tasks.shelljs.exec('cordova run android');
-            tasks.shelljs.cd('..');
+            tasks.shelljs.cd(config.folders.mobile.root);
+            config.options.cordova.runCommands.map(function(cmd){
+                tasks.shelljs.exec(cmd);
+            });
+            tasks.shelljs.cd(config.folders.mobile.backlinkToProjectRoot);
             done();
         });
 
