@@ -1,8 +1,7 @@
 (function(module){
     
-    function XplatformBuild(config){
-        var gulp = require('gulp'),
-            nconf = require('nconf');
+    function XplatformBuild(userConfig){
+        var gulp = require('gulp');
 
         var tasks = {
             del: require('del'),
@@ -19,10 +18,19 @@
             inSequence: require('run-sequence')
         };
 
+        var override = function(original, uConfig){
+            for(var p in uConfig){
+                if(typeof(uConfig[p]) !== 'object' || Array.isArray(uConfig[p])){
+                    original[p] = uConfig[p]
+                }else{
+                    override(original[p], uConfig[p]);
+                }
+            }
+            
+        };
          
-
-        config = nconf.file({file:'./defaults.js'})
-            .overrides(config);
+        var config = require('./defaults.js');
+        override(config, userConfig);
 
         var customGulpTasks = require('require-dir')('./gulptasks');
 
