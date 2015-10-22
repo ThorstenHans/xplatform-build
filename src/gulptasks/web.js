@@ -3,7 +3,6 @@
 
     function RegisterTasks(gulp, tasks, config) {
 
-
         gulp.task('private:app:templates', function() {
             return gulp.src(config.sources.ngTemplates)
                 .pipe(tasks.ngTemplateCache(config.options.ngTemplates))
@@ -11,7 +10,12 @@
         });
 
         gulp.task('private:app:js', function() {
+            
+            var preprocessorTask = tasks['gulp-typescript' || 'gulp-coffee' || 'gulp-babel'] || tasks.empty,
+                preprocessorOptions = config.addOns['gulp-typescript' || 'gulp-coffee' || 'gulp-babel'] || null;
+
             return gulp.src(config.sources.appScripts)
+                .pipe(preprocessorTask(preprocessorOptions))
                 .pipe(tasks.ngAnnotate(config.options.ngAnnotate))
                 .pipe(tasks.concat(config.filenames.appScripts))
                 .pipe(tasks.uglify(config.options.uglify))
@@ -19,11 +23,17 @@
         });
 
         gulp.task('private:app:css', function() {
+            var preprocessorTask = tasks['gulp-less' || 'gulp-sass'] || tasks.empty,
+                preprocessorOptions = config.addOns['gulp-less' || 'gulp-sass'] || null;
+            
             return gulp.src(config.sources.appStyles)
+                // works if gulp-less is existing
+                .pipe(preprocessorTask(preprocessorOptions))
                 .pipe(tasks.concat(config.filenames.appStyles))
                 .pipe(tasks.cssmin(config.options.cssmin))
                 .pipe(gulp.dest(config.folders.dist.styles));
         });
+
         gulp.task('private:app:html', function() {
             var sources = gulp.src(config.sources.injectables);
 

@@ -1,6 +1,6 @@
 {
   "name": "xplatform-build",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "cross platform build for angular frontend projects",
   "main": "src/gulpfile.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "gulp-angular-templatecache": "^1.7.0",
     "gulp-concat": "^2.6.0",
     "gulp-cssmin": "^0.1.7",
+    "gulp-empty": "^0.1.1",
     "gulp-inject": "^3.0.0",
     "gulp-ng-annotate": "^1.1.0",
     "gulp-rename": "^1.2.2",

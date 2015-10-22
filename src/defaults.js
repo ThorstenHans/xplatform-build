@@ -6,6 +6,7 @@
         var cacheDir = path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, '.cache'),
             buildDir = path.join(process.cwd(), "desktop-build");
         return {
+            addOns:{},
             folders: {
                 mobile: {
                     root: 'mobile',
