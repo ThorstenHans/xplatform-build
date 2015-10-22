@@ -1,6 +1,6 @@
 {
   "name": "xplatform-build",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "cross platform build for angular frontend projects",
   "main": "src/gulpfile.js",
   "scripts": {
