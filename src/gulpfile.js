@@ -41,7 +41,7 @@
             uglify: require('gulp-uglify'),
             path: require('path'),
             NwBuilder: require('nw-builder'),
-            inSequence: require('run-sequence'),
+            inSequence: require('run-sequence').use(gulp),
             empty: require('gulp-empty')
         };
 
